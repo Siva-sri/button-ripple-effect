@@ -1,0 +1,48 @@
+body{
+    margin: 0;/*Remove default margin*/
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    background-color: aliceblue;
+    font-family: sans-serif;
+}
+
+.btn{
+    background-color: pink;
+    padding: 20px 40px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    text-decoration: none;/*Remove line under text*/
+    color: black;
+    position: relative;
+    overflow: hidden;/*To reduce hover effect only to button*/
+}
+
+.btn span{
+    /*To bring the Content above the hover effect*/
+    position: relative;
+    z-index: 1;
+}
+
+/*Access pseudo element to add a circle*/
+/*We must initialize using before to able to modify later using hover*/
+.btn::before{
+    content: "";
+    position: absolute;/*Set parent to relative before this, used to position relative to the ancestor*/
+    background-color: orangered;
+    width: 0;
+    height: 0;
+    left: var(--xPos);
+    top: var(--yPos);
+    /*Above two are used to bring the edge to center*/
+    transform: translate(-50%,-50%);
+    /*The above is to bring the middle of element to center*/
+    border-radius: 50%;
+    transition: width 0.5s,height 0.5s;/*Transition in both height and width while hovering*/
+}
+/*Hover function to modify before pseudo element*/
+.btn:hover::before{
+    width: 300px;
+    height: 300px;
+}
